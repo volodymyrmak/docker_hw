@@ -21,13 +21,29 @@
 
 `Note: "tail -f /dev/null" is a doing nothing loop (using minimal resources) that makes Alpina container run indefinitely, to be able to run the network scripts.`
 
-## 4. Access containers CLI
+## 4. Check containers connection
+
+Get info about containers running the followind command:
+
+```bash
+~$ sudo docker container inspect <container_name>
+```
+
+And then compare the values of `"NetworkSettings" -> "Network" -> "IPAddress"` for neccessary ones with IP addresses received by inspection of the network:
+
+```bash
+~$ sudo docker network inspect <network_name>
+```
+
+At the fields: `"Containers" -> <container_hash> -> "IPv4Address"`. If the IP addresses match, containers are connected by the same network.
+
+## 5. Access containers CLI
 
 ```bash
 ~$ sudo docker container exec -it <container_name> sh
 ```
 
-## 5. Run simple TCP server and client:
+## 6. Run simple TCP server and client:
 
 ### my_network_alpine21:
 
